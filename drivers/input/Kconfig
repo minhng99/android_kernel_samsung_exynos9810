@@ -94,7 +94,6 @@ comment "Userland interfaces"
 
 config INPUT_MOUSEDEV
 	tristate "Mouse interface"
-	default y
 	help
 	  Say Y here if you want your mouse to be accessible as char devices
 	  13:32+ - /dev/input/mouseX and 13:63 - /dev/input/mice as an
@@ -200,6 +199,30 @@ config INPUT_KEYCOMBO
 	---help---
 	  Say Y here if you want to take action when some keys are pressed;
 
+config HALL
+	tristate "Enable HALL IC"
+	default n
+	help
+	  Say Y here if you want to enable Hall IC Feature
+	  and send a event when cover state is changed.
+	  Active gpio state is low and active event value is 0.
+
+	  If unsure, say N.
+
+config CERTIFY_HALL
+	tristate "Enable CERTIFY HALL IC"
+	default n
+	help
+	  Say Y here if you want to enable Certify Hall IC Feature and
+	  send a event when cover is detected.
+	  Active gpio state is low and active event value is 1.
+
+	  If unsure, say N.
+
+config SEC_DEBUG_TSP_LOG
+	tristate "Support for tsp_msg"
+	default n
+
 comment "Input Device Drivers"
 
 source "drivers/input/keyboard/Kconfig"
@@ -211,6 +234,8 @@ source "drivers/input/joystick/Kconfig"
 source "drivers/input/tablet/Kconfig"
 
 source "drivers/input/touchscreen/Kconfig"
+
+source "drivers/input/wacom/Kconfig"
 
 source "drivers/input/misc/Kconfig"
 
